@@ -70,14 +70,15 @@ int deserialize(const char *filename, Config *config) {
 }
 
 int main(void) {
-    Config config = {
-        .username = "",
-        .remoteHost = "",
-        .remoteDirectory = "",
-        .localDirectory = ""
-    };
-
-    serialize("config", &config);
+    Config config;
+    deserialize("/etc/simplersync/config.json", &config);
+    
+    char command[256];
+    snprintf(command, "scp -r %s@%s:%s %s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory);
+    if (system(command) != 0) {
+        printf("An error occured!\n");
+        return 1;
+    }
 
     return 0;
 }
