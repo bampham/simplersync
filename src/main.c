@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <jansson.h>
+#include <unistd.h>
 
 typedef struct {
     char username[50];
@@ -73,11 +74,14 @@ int main(void) {
     Config config;
     deserialize("/etc/simplersync/config.json", &config);
     
-    char command[256];
-    snprintf(command, "scp -r %s@%s:%s %s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory);
-    if (system(command) != 0) {
-        printf("An error occured!\n");
-        return 1;
+    for (;;) {
+	char command[512];
+	snprintf(command, sizeof(command), "scp -r %s@%s:%s %s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory);
+	if (system(command) != 0) {
+	    printf("An error occured!\n");
+	    return 1;
+	}
+    	sleep(500);
     }
 
     return 0;
