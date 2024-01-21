@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <jansson.h>
 #include <unistd.h>
+#include <time.h>
 
 typedef struct {
     char username[50];
     char remoteHost[32];
     char remoteDirectory[128];
     char localDirectory[128];
+    int backupFrequencyHours;
 } Config;
 
 void serialize(const char *filename, const Config *config) {
@@ -17,6 +19,7 @@ void serialize(const char *filename, const Config *config) {
     json_object_set_new(root, "remoteHost", json_string(config->remoteHost));
     json_object_set_new(root, "remoteDirectory", json_string(config->remoteDirectory));
     json_object_set_new(root, "localDirectory", json_string(config->localDirectory));
+    json_object_set_new(root, "backupFrequencyHours", json_integer(config->backupFrequencyHours));
 
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
@@ -53,8 +56,9 @@ int deserialize(const char *filename, Config *config) {
     json_t *remoteHostJson = json_object_get(root, "remoteHost");
     json_t *remoteDirectoryJson = json_object_get(root, "remoteDirectory");
     json_t *localDirectoryJson = json_object_get(root, "localDirectory");
+    json_t *backupFrequencyJson = json_object_get(root, "backupFrequencyHours");
 
-    if (!usernameJson || !remoteHostJson || !remoteDirectoryJson || !localDirectoryJson) {
+    if (!usernameJson || !remoteHostJson || !remoteDirectoryJson || !localDirectoryJson || !backupFrequencyJson) {
         fprintf(stderr, "Error getting values from JSON object\n");
         json_decref(root);
         return 0;  
@@ -64,6 +68,7 @@ int deserialize(const char *filename, Config *config) {
     snprintf(config->remoteHost, sizeof(config->remoteHost), "%s", json_string_value(remoteHostJson));
     snprintf(config->remoteDirectory, sizeof(config->remoteDirectory), "%s", json_string_value(remoteDirectoryJson));
     snprintf(config->localDirectory, sizeof(config->localDirectory), "%s", json_string_value(localDirectoryJson));
+    config->backupFrequencyHours = json_integer_value(backupFrequencyJson);
 
     json_decref(root);
 
@@ -73,15 +78,16 @@ int deserialize(const char *filename, Config *config) {
 int main(void) {
     Config config;
     deserialize("/etc/simplersync/config.json", &config);
-    
-    for (;;) {
-	char command[512];
-	snprintf(command, sizeof(command), "scp -r %s@%s:%s %s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory);
-	if (system(command) != 0) {
-	    printf("An error occured!\n");
-	    return 1;
-	}
-    	sleep(500);
+
+    while (1) {
+        char command[512];
+        snprintf(command, sizeof(command), "scp -r %s@%s:%s %s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory);
+
+        if (system(command) != 0) {
+            fprintf(stderr, "An error occurred during backup!\n");
+        }
+
+        sleep(config.backupFrequencyHours * 3600);
     }
 
     return 0;

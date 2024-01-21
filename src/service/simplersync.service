@@ -1,0 +1,12 @@
+[Unit]
+Description=SimpleRsync Backup Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/simplersync
+Restart=always
+User=cbroo
+RestartSec=60
+
+[Install]
+WantedBy=default.target
