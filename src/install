@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Compile the program
+gcc main.c -o simplersync -ljansson
+
+# Create a dedicated user for the simplersync service
+sudo adduser simplersync
+
+# Create a group for the simplersync service
+sudo addgroup simplersync_group
+
+# Add the user to the group
+sudo adduser simplersync simplersync_group
+
+# Add sudoers entry for running simplersync without password prompt
+echo "simplersync ALL=(ALL) NOPASSWD: $(pwd)/simplersync" | sudo tee -a /etc/sudoers
+
+# Create the systemd service unit file
+sudo tee /etc/systemd/system/simplersync.service > /dev/null <<EOL
+[Unit]
+Description=Simple Rsync Service
+After=network.target
+
+[Service]
+ExecStart=sudo $(pwd)/simplersync
+WorkingDirectory=$(pwd)
+User=simplersync_user
+Group=simplersync_group
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# Reload systemd to pick up the changes
+sudo systemctl daemon-reload
+
+# Creating default config file
+mkdir -p /etc/simplersync/
+echo -e '{\n  "username": "root",\n  "remoteHost": "127.0.0.1",\n  "remoteDirectory": "",\n  "localDirectory": "."\n}' > /etc/simplersync/config.json
+
