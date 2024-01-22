@@ -1,3 +1,3 @@
-gcc simplersync.c -o simplersync.x86_64 -ljansson
-sudo chmod o+r /etc/simplersync
-sudo cp simplersync.x86_64 /usr/local/bin/
+gcc simplersync.c ser.c -o simplersync.x86_64 -ljansson
+chmod o+r /etc/simplersync
+cp simplersync.x86_64 /usr/local/bin/simplersync

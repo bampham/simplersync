@@ -2,5 +2,6 @@
   "username": "root",
   "remoteHost": "127.0.0.1",
   "remoteDirectory": "",
-  "localDirectory": "."
+  "localDirectory": ".",
+  "backupFrequencyHours": "24"
 }
