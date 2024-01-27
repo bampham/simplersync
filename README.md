@@ -27,7 +27,7 @@ Config in /etc/simplersync/config.json
   "username": "root",
   "remoteHost": "192.168.x.x",
   "remoteDirectory": "/path/to/remote/dir",
-  "localDirectory": "/path/to/backup/dest",
+  "destinationDirectory": "/path/to/backup/dest",
   "backupFrequencyHours": 24
 }
 ``` 

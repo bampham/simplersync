@@ -19,10 +19,10 @@ int main(void) {
     while (1) {
         getCurrentTime(date, sizeof(date));
 
-        snprintf(command, sizeof(command), "scp -r %s@%s:%s %s/%s", config.username, config.remoteHost, config.remoteDirectory, config.localDirectory, date);
+            snprintf(command, sizeof(command), "scp -r %s@%s:%s %s/%s", config.username, config.remoteHost, config.remoteDirectory, config.destinationDirectory, date);
         if (system(command) != 0) fprintf(stderr, "An error occurred during backup!\n");
 
-        snprintf(src, sizeof(src), "%s/%s", config.localDirectory, date);
+        snprintf(src, sizeof(src), "%s/%s", config.destinationDirectory, date);
         snprintf(dest, sizeof(dest), "%s.zip", src);
 
         if (zipDir(src, dest) != 0) {
