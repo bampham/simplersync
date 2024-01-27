@@ -3,5 +3,5 @@
   "remoteHost": "127.0.0.1",
   "remoteDirectory": "",
   "localDirectory": ".",
-  "backupFrequencyHours": "24"
+  "backupFrequencyHours": 24
 }
