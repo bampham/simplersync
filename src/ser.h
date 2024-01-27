@@ -9,7 +9,7 @@ typedef struct {
     char username[50];
     char remoteHost[32];
     char remoteDirectory[128];
-    char localDirectory[128];
+    char destinationDirectory[128];
     int backupFrequencyHours;
 } Config;
 
