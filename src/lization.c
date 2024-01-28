@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <jansson.h>
 
-#include "ser.h"
+#include "lization.h"
 
 void serialize(const char *filename, const Config *config) {
     json_t *root = json_object();
