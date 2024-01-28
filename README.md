@@ -6,7 +6,6 @@
 Simple remote sync service.
 
 
-
 ## Build/Installation
 
 Clone and build with gcc
@@ -47,4 +46,14 @@ RestartSec=60
 
 [Install]
 WantedBy=default.target
+```
+
+
+## Usage
+
+Start service.
+
+```bash
+sudo systemctl start simplersync
+sudo systemctl enable simplersync
 ```
