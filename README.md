@@ -42,7 +42,7 @@ After=network.target
 [Service]
 ExecStart=/usr/local/bin/simplersync
 Restart=always
-User=cbroo
+User=root
 RestartSec=60
 
 [Install]

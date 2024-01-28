@@ -6,6 +6,7 @@
 #include <dirent.h>
 
 #include "utils.h"
+
 void getCurrentTime(char* str, size_t bufferSize) {
     time_t currentTime;
     time(&currentTime);

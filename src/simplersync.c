@@ -2,14 +2,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include <time.h>
 
 #include "ser.h"
 #include "utils.h"
 
 int main(void) {
     Config config;
-    deserialize("/etc/simplersync/config.json", &config);
+    if (deserialize("/etc/simplersync/config.json", &config) != 0) {
+        fprintf(stderr, "Error deserializing /etc/simplersync/config.json");
+    }
 
     char date[128];
     char command[512];
@@ -18,15 +19,14 @@ int main(void) {
 
     while (1) {
         getCurrentTime(date, sizeof(date));
-
-            snprintf(command, sizeof(command), "scp -r %s@%s:%s %s/%s", config.username, config.remoteHost, config.remoteDirectory, config.destinationDirectory, date);
+        snprintf(command, sizeof(command), "scp -r %s@%s:%s %s/%s", config.username, config.remoteHost, config.remoteDirectory, config.destinationDirectory, date);
         if (system(command) != 0) fprintf(stderr, "An error occurred during backup!\n");
 
         snprintf(src, sizeof(src), "%s/%s", config.destinationDirectory, date);
-        snprintf(dest, sizeof(dest), "%s.zip", src);
+        snprintf(dest, sizeof(dest), "%s/%s.zip", config.destinationDirectory, date);
 
         if (zipDir(src, dest) != 0) {
-            fprintf(stderr, "Error zipping directory");
+            fprintf(stderr, "Error zipping dir");
         }
 
         if (rmdir(src) != 0) {
@@ -36,6 +36,7 @@ int main(void) {
         bzero(src, sizeof(src));
         bzero(dest, sizeof(dest));
         bzero(date, sizeof(date));
+        bzero(command, sizeof(command));
         sleep(config.backupFrequencyHours * 3600);
     }
 
