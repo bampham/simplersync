@@ -32,7 +32,7 @@ int deserialize(const char *filename, Config *config) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
         perror("Error opening file");
-        return 0;  
+        return 1;
     }
 
     json_error_t error;
@@ -41,7 +41,7 @@ int deserialize(const char *filename, Config *config) {
 
     if (!root) {
         fprintf(stderr, "JSON error on line %d: %s\n", error.line, error.text);
-        return 0;  
+        return 1;  
     }
 
     json_t *usernameJson = json_object_get(root, "username");
@@ -53,7 +53,7 @@ int deserialize(const char *filename, Config *config) {
     if (!usernameJson || !remoteHostJson || !remoteDirectoryJson || !destinationDirectoryJson || !backupFrequencyJson) {
         fprintf(stderr, "Error getting values from JSON object\n");
         json_decref(root);
-        return 0;  
+        return 1;  
     }
 
     snprintf(config->username, sizeof(config->username), "%s", json_string_value(usernameJson));
@@ -64,6 +64,6 @@ int deserialize(const char *filename, Config *config) {
 
     json_decref(root);
 
-    return 1;  
+    return 0;  
 }
 

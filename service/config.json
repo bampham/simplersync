@@ -1,6 +1,6 @@
 {
   "username": "root",
-  "remoteHost": "127.0.0.1",
+  "remoteHost": "192.168.x.x",
   "remoteDirectory": "",
   "destinationDirectory": ".",
   "backupFrequencyHours": 24
