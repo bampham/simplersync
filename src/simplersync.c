@@ -8,6 +8,8 @@
 
 int main(void) {
     Config config;
+    /* derserialize will pull config.json file and parse it into struct of type "Config"
+     * containing details of services bahavior */
     if (deserialize("/etc/simplersync/config.json", &config) != 0) {
         fprintf(stderr, "Error deserializing /etc/simplersync/config.json");
     }
@@ -29,6 +31,8 @@ int main(void) {
             fprintf(stderr, "Error zipping dir");
         }
 
+        /* original directory deleted after
+         * zipfile is compressed */
         if (rmdir(src) != 0) {
             fprintf(stderr, "Error deleting dir");
         }
@@ -37,7 +41,7 @@ int main(void) {
         bzero(dest, sizeof(dest));
         bzero(date, sizeof(date));
         bzero(command, sizeof(command));
-        sleep(config.backupFrequencyHours * 3600);
+        sleep(config.backupFrequencyHours * 3600); // 3600 seconds in one hour
     }
 
     return 0;
