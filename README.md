@@ -61,6 +61,14 @@ RestartSec=60
 WantedBy=default.target
 ```
 
+## Key
+
+Generate and copy ssh key over to remote computer.
+
+```bash
+ssh-keygen
+ssh-copy-id username@x.x.x.x
+``` 
 
 ## Usage
 
