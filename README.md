@@ -10,18 +10,30 @@ Simple remote sync service.
 
 Clone and build with gcc
 
-Install the zlib and jansson libraries.
+### Install GCC
 
-### Ubuntu
+#### Ubuntu
 ```bash
-sudo apt install libjansson-dev
-sudo apt install zlib1g-dev
+sudo apt install build-essential
 ```
-### Arch
+
+#### Arch
 ```bash
-sudo pacman -S zlib
-sudo pacman -S jansson
+sudo pacman -S gcc
 ```
+
+### Install depencencies.
+
+#### Ubuntu
+```bash
+sudo apt install libjansson-dev zlib1g-dev
+```
+
+#### Arch
+```bash
+sudo pacman -S zlib jansson
+```
+
 ### Compile
 ```bash
   git clone https://github.com/bampham/simplersync
@@ -29,7 +41,6 @@ sudo pacman -S jansson
   sudo ./build && sudo ./install
 
 ```
-
 
 ## Configure
 
