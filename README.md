@@ -22,8 +22,10 @@ sudo apt install build-essential
 sudo pacman -S gcc
 ```
 
+ 
 ### Install depencencies.
 
+ 
 #### Ubuntu
 ```bash
 sudo apt install libjansson-dev zlib1g-dev
