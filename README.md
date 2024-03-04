@@ -23,7 +23,7 @@ sudo pacman -S gcc
 ```
 
  
-### Install depencencies: 
+### Install dependencies: 
 
  
 #### Ubuntu
