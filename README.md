@@ -10,7 +10,7 @@ Simple remote sync service.
 
 Clone and build with gcc
 
-### Install GCC
+### Install GCC: 
 
 #### Ubuntu
 ```bash
@@ -23,7 +23,7 @@ sudo pacman -S gcc
 ```
 
  
-### Install depencencies.
+### Install depencencies: 
 
  
 #### Ubuntu
@@ -36,7 +36,7 @@ sudo apt install libjansson-dev zlib1g-dev
 sudo pacman -S zlib jansson
 ```
 
-### Compile
+### Compile: 
 ```bash
   git clone https://github.com/bampham/simplersync
   cd simplersync
