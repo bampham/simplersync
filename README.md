@@ -60,7 +60,7 @@ Config in /etc/simplersync/config.json
 Choose desired user in /etc/systemd/system/simplersync.service
 
 ```service
-Unit]
+[Unit]
 Description=SimpleRsync Backup Service
 After=network.target
 
