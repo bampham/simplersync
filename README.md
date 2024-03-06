@@ -108,3 +108,7 @@ Start service.
 sudo systemctl start simplersync
 sudo systemctl enable simplersync
 ```
+
+## To-Do:
+- handle multiple remote computers,
+- rewriting zip function and del function.
