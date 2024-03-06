@@ -74,9 +74,26 @@ RestartSec=60
 WantedBy=default.target
 ```
 
-## Key
+### Remote Key:
 
-Generate and copy ssh key over to remote computer.
+Generate and copy ssh key over to remote computer, 
+which also needs to have sshd running.
+
+### Install sshd on remote computer:
+
+#### Ubuntu
+```bash
+sudo apt install openssh-server
+sudo systemctl start sshd
+```
+
+#### Arch
+```bash
+sudo pacman -S openssh
+sudo systemctl start sshd
+```
+
+### Generate and copy key:
 
 ```bash
 ssh-keygen
