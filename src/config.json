@@ -1,1 +1,29 @@
-{"username":"test","remote_host":"test","remote_directory":"test","destination_directory":"test","frequency":24}
+[
+  {
+    "hostname": "test",
+    "user": "test",
+    "ip": "test",
+    "key_path": "test",
+    "remote_path": "test",
+    "destination_path": "test",
+    "frequency": 24
+  },
+  {
+    "hostname": "test",
+    "user": "test",
+    "ip": "test",
+    "key_path": "test",
+    "remote_path": "test",
+    "destination_path": "test",
+    "frequency": 24
+  },
+  {
+    "hostname": "test",
+    "user": "test",
+    "ip": "test",
+    "key_path": "test",
+    "remote_path": "test",
+    "destination_path": "test",
+    "frequency": 24
+  }
+]

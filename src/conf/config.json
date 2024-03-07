@@ -1,0 +1,23 @@
+[
+  {
+    "username": "test",
+    "remote_host": "test",
+    "remote_directory": "test",
+    "destination_directory": "test",
+    "frequency": 24
+  },
+  {
+    "username": "test",
+    "remote_host": "test",
+    "remote_directory": "test",
+    "destination_directory": "test",
+    "frequency": 24
+  },
+  {
+    "username": "test",
+    "remote_host": "test",
+    "remote_directory": "test",
+    "destination_directory": "test",
+    "frequency": 24
+  }
+]
