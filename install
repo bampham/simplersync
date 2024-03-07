@@ -1,6 +1,0 @@
-mkdir -p /etc/simplersync/
-cp service/config.json /etc/simplersync/config.json
-
-cp service/simplersync.service /etc/systemd/system/simplersync.service
-sudo systemctl daemon-reload
-

@@ -1,3 +1,0 @@
-gcc src/simplersync.c src/utils.c src/lization.c -o simplersync.x86_64 -ljansson -lz
-chmod o+r /etc/simplersync
-cp simplersync.x86_64 /usr/local/bin/simplersync
